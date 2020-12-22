@@ -46,7 +46,7 @@ public class Calculator {
     public void calculate(Double value, char operator) throws  NotSupportedOperationException, DivisionByZeroException {
         // Validating input parameters
         if ( false == isOperationSupported((operator)) ){
-            throw new NotSupportedOperationException(operator);
+            throw new NotSupportedOperationException();
         } else if ( true == isDivisionByZero(value, operator) ){
             throw new DivisionByZeroException();
         }

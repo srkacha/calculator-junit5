@@ -14,8 +14,12 @@ public class CalculatorAdvanced extends Calculator{
         return (true == isCharNumerical(action)) || ('!' == action);
     }
 
-    private Double calculateIntegerPartFactorial(Double value){
-        Integer result = value.intValue();
+    private boolean isCharacteristicValueParamValid(char value){
+        return ( 'A' == value ) || ( 'P' == value );
+    }
+
+    private Integer calculateFactorial(Integer value){
+        Integer result = value;
         Integer multiplier = new Integer(result - 1);
 
         while (1 <= multiplier){
@@ -23,22 +27,47 @@ public class CalculatorAdvanced extends Calculator{
             multiplier--;
         }
 
-        return result.doubleValue();
+        return result;
     }
 
-    private Double calculateIntegerPartExponentiation(Double value, Integer exponent){
-        Integer integerValue = value.intValue();
-        Integer result = integerValue;
+    private Integer calculateExponentiation(Integer value, Integer exponent){
+        Integer result = value;
 
         // Special case where both values are 0
-        if (0 == result && 0 == exponent) return 1.0;
+        if (0 == result && 0 == exponent) return 1;
 
         while (1 < exponent){
-            result = result * integerValue;
+            result = result * value;
             exponent--;
         }
 
-        return result.doubleValue();
+        return result;
+    }
+
+    private Boolean isArmstrongNumber(Integer value){
+        Integer sum = 0;
+        Integer numOfDigits = value.toString().length();
+        Integer tempValue = value;
+
+        while(0 != tempValue){
+            Integer digit = tempValue % 10;
+            sum += calculateExponentiation(digit, numOfDigits);
+            tempValue /= 10;
+        }
+
+        return value == sum;
+    }
+
+    private Boolean isPerfectNumber(Integer value){
+        Integer sum = 0;
+
+        for (Integer divider = 1; divider <= (value / 2); divider++){
+            if (value % divider == 0){
+                sum += divider;
+            }
+        }
+
+        return  value == sum;
     }
 
     // Public methods
@@ -55,12 +84,38 @@ public class CalculatorAdvanced extends Calculator{
             if ((currentValue < 0) || currentValue > 10){
                 throw new NumberNotInAreaException();
             }
-            result = calculateIntegerPartFactorial(currentValue);
+            result = calculateFactorial(currentValue.intValue()).doubleValue();
         }else{ // When the action is a digit
             Integer exponent = 48 - (int)action;
-            result = calculateIntegerPartExponentiation(currentValue, exponent);
+            result = calculateExponentiation(currentValue.intValue(), exponent).doubleValue();
         }
 
         setCurrentValue(result);
+    }
+
+    public Boolean hasCharacteristic(char value) throws NotSupportedOperationException, NumberNotInAreaException{
+        Boolean result = false;
+        Double currentValue = getCurrentValue();
+        Integer integerPart = currentValue.intValue();
+
+        // Validating input parameters
+        if (false == isCharacteristicValueParamValid(value)){
+            throw new NotSupportedOperationException();
+        }
+
+        if (integerPart < 1){
+            throw new NumberNotInAreaException();
+        }
+
+        switch (value){
+            case 'A':
+                result = isArmstrongNumber(integerPart);
+                break;
+            case 'P':
+                result = isPerfectNumber(integerPart);
+                break;
+        }
+
+        return result;
     }
 }

@@ -20,7 +20,7 @@ public class CalculatorAdvanced extends Calculator{
 
     private Integer calculateFactorial(Integer value){
         Integer result = value;
-        Integer multiplier = new Integer(result - 1);
+        Integer multiplier = result - 1;
 
         while (1 <= multiplier){
             result = result * multiplier;
@@ -55,7 +55,7 @@ public class CalculatorAdvanced extends Calculator{
             tempValue /= 10;
         }
 
-        return value == sum;
+        return value.equals(sum);
     }
 
     private Boolean isPerfectNumber(Integer value){
@@ -67,7 +67,7 @@ public class CalculatorAdvanced extends Calculator{
             }
         }
 
-        return  value == sum;
+        return  value.equals(sum);
     }
 
     // Public methods
@@ -86,7 +86,7 @@ public class CalculatorAdvanced extends Calculator{
             }
             result = calculateFactorial(currentValue.intValue()).doubleValue();
         }else{ // When the action is a digit
-            Integer exponent = 48 - (int)action;
+            Integer exponent = (int)action - 48;
             result = calculateExponentiation(currentValue.intValue(), exponent).doubleValue();
         }
 

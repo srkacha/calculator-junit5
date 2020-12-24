@@ -16,12 +16,22 @@ import com.jova.calculator.exception.NotSupportedOperationException;
 public class Calculator {
 
     // Class attributes
+    /**
+     * Property that holds the current value for the calculator.
+     */
     private Double currentValue;
+
+    /**
+     * Array of supported operators used in operator validity checking.
+     */
     private static final char[] VALID_OPERATORS = new char[]{
         '+', '-', '*', '/'
     };
 
     // Constructor
+    /**
+     * Constructor for the Calculator class which sets the current state value to zero.
+     */
     public Calculator(){
         currentValue = 0.0;
     }
@@ -46,6 +56,15 @@ public class Calculator {
     }
 
     // Private helper methods
+    /**
+     * Helper method used to determine if the operator character is valid.
+     * Returns true if the VALID_OPERATORS array contains the requested operator,
+     * otherwise returns false.
+     *
+     * @param operator Operator which validity is checked.
+     *
+     * @return Boolean value true if supported, false if not.
+     */
     private boolean isOperationSupported(char operator){
         boolean supported = false;
 
@@ -59,6 +78,16 @@ public class Calculator {
         return supported;
     }
 
+    /**
+     * Helper method used to determine if the requested operation is division by zero.
+     * Returs  true if the operator is division, and value is zero, otherwise returns false.
+     *
+     * @param value Operand to be checked.
+     *
+     * @param operator Operator to be checked.
+     *
+     * @return Boolean value of true if division with zero is detected, otherwise false.
+     */
     private boolean isDivisionByZero(Double value, char operator){
         return ( 0.0 == value ) && ( '/' == operator );
     }

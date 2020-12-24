@@ -80,7 +80,7 @@ public class CalculatorTest {
     @ParameterizedTest
     @MethodSource("parametersForAddition")
     public void testAdditionParameterized(char operator, Double currentValue, Double value, Double result)
-                                            throws NotSupportedOperationException, DivisionByZeroException {
+            throws NotSupportedOperationException, DivisionByZeroException {
 
         calculator.setCurrentValue(currentValue);
         calculator.calculate(value, operator);

@@ -78,7 +78,7 @@ public class CalculatorAdvanced extends Calculator{
      *
      * @param value The first operand of the exponentiation.
      *
-     * @param exponent The second operand of the exponentination.
+     * @param exponent The second operand of the exponentiation.
      *
      * @return Integer value of the resulting exponentiation.
      */

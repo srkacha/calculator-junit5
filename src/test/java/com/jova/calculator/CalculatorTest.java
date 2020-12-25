@@ -39,10 +39,11 @@ public class CalculatorTest {
 
     /**
      * Method that is called before each test is run.
+     * Resets the current value to zero.
      */
     @BeforeEach
     public void beforeEach(){
-        calculator = new Calculator();
+        calculator.setCurrentValue(0.0);
     }
 
     // Parametrization stream methods
